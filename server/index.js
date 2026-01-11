@@ -11,7 +11,14 @@ const friendRoutes = require("./routes/friendRoutes");
 
 const app = express();
 
-app.use(cors());
+// Configuration dynamique du CORS
+const originURL = process.env.FRONTEND_URL || "http://localhost:5173";
+
+app.use(cors({
+  origin: originURL,
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Routes
@@ -27,18 +34,22 @@ mongoose
     console.log("DB Connection Successfull");
   })
   .catch((err) => {
-    console.log(err.message);
+    console.log("DB Error:", err.message);
   });
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`Server Started on Port ${process.env.PORT}`);
+
+const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () => {
+  console.log(`Server Started on Port ${PORT}`);
 });
 
+// Configuration Socket.io pour la production
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: originURL,
     credentials: true,
   },
+  transports: ["websocket", "polling"] // Meilleure compatibilité
 });
 
 app.set("socketio", io);
