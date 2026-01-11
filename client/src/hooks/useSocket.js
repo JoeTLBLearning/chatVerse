@@ -7,7 +7,9 @@ export const useSocket = (currentUser) => {
 
   useEffect(() => {
     if (currentUser && !socket.current) {
-      socket.current = io(host);
+      socket.current = io(host, {
+        transports: ["websocket"], // Ajoute ceci pour éviter les erreurs CORS sur Render
+      });
       socket.current.emit("add-user", currentUser._id);
     }
 
