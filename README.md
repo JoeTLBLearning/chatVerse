@@ -98,7 +98,7 @@ npm run dev
 Ouvrez votre navigateur sur http://localhost:5173.
 
 
-## Bonus : Déploiement (Production sur Render)
+## Bonus : Déploiement (Production sur Render) 🌐
 Le projet est configuré pour être déployé sur Render avec deux services distincts.
 
 Backend (Web Service)
