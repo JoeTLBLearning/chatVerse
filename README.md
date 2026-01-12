@@ -172,8 +172,12 @@ Projet réalisé par Joe_TLB.
 
 ##  Bonus : Captures d'écrans 
 1. La page de login : 
-![La page de login](./screenshots/login.png)
+![La page de login](screenshots/login.jpg)
 2. La page d'inscription
+![La page d'inscription](screenshots/inscription.jpg)
 3. Le dashboard
+![Le dashboard](screenshots/dashboard.jpg)
 4. Le modal d'invitation
+![Le modal d'invitation](screenshots/addFriend.jpg)
 5. Le modal de gestion des membre du salon 
+![Le modal de gestion des membre du salon ](screenshots/manageRoom.jpg)
