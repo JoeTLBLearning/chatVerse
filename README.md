@@ -172,7 +172,7 @@ Projet réalisé par Joe_TLB.
 
 ##  Bonus : Captures d'écrans 
 1. La page de login : 
-`![La page de login](./screenshots/login.png)`
+![La page de login](./screenshots/login.png)
 2. La page d'inscription
 3. Le dashboard
 4. Le modal d'invitation
