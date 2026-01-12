@@ -171,6 +171,7 @@ chatVerse/
 Projet réalisé par Joe_TLB.
 
 ##  Bonus : Captures d'écrans 📸 
+
 1. La page de login : 
 <p align="center">
   <img src="screenshots/login.JPG" width="500"/>
