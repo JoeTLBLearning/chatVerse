@@ -60,11 +60,12 @@ npm install
 ```
 
 Créez un fichier .env dans le dossier server/ et ajoutez-y :
-
+```bash
 PORT=5000
 MONGO_URI=votre_lien_de_connexion_mongodb_atlas
 JWT_SECRET=votre_clé_secrète_super_longue
 FRONTEND_URL=http://localhost:5173
+``` 
 
 Lancez le serveur :
 
@@ -104,22 +105,42 @@ Le projet est configuré pour être déployé sur Render avec deux services dist
 Backend (Web Service)
 Root Directory : server
 
-Build Command : npm install
+Build Command : 
+```bash
 
-Start Command : npm start
+npm install
+
+```
+
+Start Command : 
+```bash
+
+npm start
+
+```
 
 Variables d'environnement :
+
+```bash
 
 MONGO_URI : Lien MongoDB Atlas.
 
 PORT : 10000 (Port par défaut de Render).
 
+```
+
 FRONTEND_URL : L'URL de votre site frontend déployé (ex: https://chatverse.onrender.com).
 
 Frontend (Static Site)
+
 Root Directory : client
 
-Build Command : npm install && npm run build
+Build Command :
+```bash
+
+ npm install && npm run build
+
+```
 
 Publish Directory : dist
 
