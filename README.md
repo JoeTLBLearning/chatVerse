@@ -129,7 +129,7 @@ Source: /* -> Destination: /index.html -> Action: Rewrite.
 
 
 ## Structure du projet : 
-
+```bash
 chatVerse/
 ├── client/              # Frontend (React + Vite)
 │   ├── src/
@@ -144,6 +144,7 @@ chatVerse/
 │   ├── routes/          # Définitions des routes API
 │   └── index.js         # Point d'entrée (Socket.io setup)
 └── README.md
+```
 
 # 👤 Auteur
 Projet réalisé par Joe_TLB.
