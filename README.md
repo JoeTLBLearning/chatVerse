@@ -99,7 +99,7 @@ npm run dev
 Ouvrez votre navigateur sur http://localhost:5173.
 
 
-## Bonus : Déploiement (Production sur Render) 🌐
+## 🌐 Déploiement (Production sur Render)
 Le projet est configuré pour être déployé sur Render avec deux services distincts.
 
 Backend (Web Service)
@@ -169,3 +169,11 @@ chatVerse/
 
 # 👤 Auteur
 Projet réalisé par Joe_TLB.
+
+##  Bonus : Captures d'écrans 
+1. La page de login : 
+`![La page de login](./screenshots/login.png)`
+2. La page d'inscription
+3. Le dashboard
+4. Le modal d'invitation
+5. Le modal de gestion des membre du salon 
