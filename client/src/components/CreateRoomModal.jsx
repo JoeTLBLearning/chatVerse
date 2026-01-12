@@ -5,14 +5,20 @@ import { toast } from "react-toastify";
 
 function CreateRoomModal({ currentUser, closeDetails, onRoomCreated }) {
   const [roomName, setRoomName] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Ajout pour la sécurité
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Protection contre le double-clic
+    if (isLoading) return;
+
     if (roomName.length < 3) {
       toast.error("Le nom du serveur doit faire au moins 3 caractères.");
       return;
     }
 
+    setIsLoading(true); // On commence le chargement
     try {
       const { data } = await axios.post(createRoomRoute, {
         name: roomName,
@@ -26,6 +32,8 @@ function CreateRoomModal({ currentUser, closeDetails, onRoomCreated }) {
       }
     } catch (error) {
       toast.error("Erreur lors de la création du salon.");
+    } finally {
+      setIsLoading(false); // On libère le chargement peu importe l'issue
     }
   };
 
@@ -58,9 +66,14 @@ function CreateRoomModal({ currentUser, closeDetails, onRoomCreated }) {
             </button>
             <button
               type="submit"
-              className="flex-1 py-3 rounded-lg font-bold bg-[#22d3ee] text-[#020617] hover:bg-white transition-colors"
+              disabled={isLoading} // Désactivé pendant le chargement
+              className={`flex-1 py-3 rounded-lg font-bold transition-colors ${
+                isLoading 
+                ? "bg-slate-600 text-slate-400 cursor-not-allowed" 
+                : "bg-[#22d3ee] text-[#020617] hover:bg-white"
+              }`}
             >
-              Créer
+              {isLoading ? "Création..." : "Créer"}
             </button>
           </div>
         </form>

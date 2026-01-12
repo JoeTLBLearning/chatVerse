@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { loginRoute } from "../utils/APIRoutes";
-import Logo from "../assets/logo.png"; 
+import Logo from "../assets/logo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -27,11 +27,11 @@ function Login() {
   const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-[#0f172a]">
+    <div className="h-screen w-screen flex items-center justify-center bg-[#0f172a] px-4">
       {/* Le bloc de connexion est maintenant blanc (bg-white) */}
-      <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200">
+      <div className="bg-white p-6 md:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          
+
           {/* Logo Section */}
           <div className="flex justify-center mb-2">
             <img src={Logo} alt="ChatVerse" className="h-20 w-auto object-contain" />
@@ -41,32 +41,32 @@ function Login() {
             Connexion
           </h2>
 
-          <input 
-            type="text" 
-            name="username" 
-            placeholder="Nom d'utilisateur" 
+          <input
+            type="text"
+            name="username"
+            placeholder="Nom d'utilisateur"
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
-            onChange={handleChange} 
+            onChange={handleChange}
           />
 
-          <input 
-            type="password" 
-            name="password" 
-            placeholder="Mot de passe" 
+          <input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
-            onChange={handleChange} 
+            onChange={handleChange}
           />
 
           {/* Bouton Cyan avec texte foncé pour la visibilité */}
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-[#22d3ee] text-[#0f172a] font-bold py-3 rounded-lg hover:bg-[#1cb9d1] transition-all uppercase shadow-lg shadow-cyan-100"
           >
             Se Connecter
           </button>
 
           <p className="text-center text-gray-500 text-sm">
-            Nouveau sur ChatVerse ? 
+            Nouveau sur ChatVerse ?
             <Link to="/register" className="text-[#22d3ee] font-bold ml-1 hover:underline">
               Créer un compte
             </Link>

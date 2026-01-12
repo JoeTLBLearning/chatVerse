@@ -27,6 +27,9 @@ function Dashboard() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(undefined);
 
+  // Pour mobile
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   // États de navigation
   const [viewState, setViewState] = useState("DM");
   const [currentChat, setCurrentChat] = useState(undefined);
@@ -224,27 +227,84 @@ function Dashboard() {
   };
 
   return (
-    <div className="h-screen w-screen flex overflow-hidden bg-[#0f172a]">
-      <div className="absolute top-3 right-10 z-30">
-        <button onClick={() => setShowRequestsModal(true)} className="relative p-2 bg-slate-900 border border-slate-800 rounded-full hover:border-[#22d3ee] transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${allNotifications.length > 0 ? "text-[#22d3ee] animate-pulse" : "text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-          {allNotifications.length > 0 && <span className="absolute -top-1 -right-1 flex h-4 w-4 bg-red-500 rounded-full text-[10px] text-white items-center justify-center font-bold">{allNotifications.length}</span>}
-        </button>
-      </div>
+  <div className="h-screen w-screen flex overflow-hidden bg-[#0f172a] relative">
+    
+    {/* BOUTON HAMBURGER (Visible uniquement sur mobile) */}
+    {!isSidebarOpen && (
+      <button 
+        onClick={() => setIsSidebarOpen(true)}
+        className="md:hidden absolute top-4 left-4 z-50 p-2 bg-slate-800 rounded-lg text-white"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    )}
 
-      <ServerBar rooms={rooms} viewState={viewState} currentRoom={currentRoom} onDMClick={handleDMSelect} onRoomClick={handleRoomSelect} onAddRoom={() => setShowCreateRoomModal(true)} />
+    {/* OVERLAY (Floute l'arrière-plan quand le menu est ouvert sur mobile) */}
+    {isSidebarOpen && (
+      <div 
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[40] md:hidden"
+        onClick={() => setIsSidebarOpen(false)}
+      />
+    )}
+
+    {/* CONTENEUR NAVIGATION (ServerBar + Sidebar) */}
+    <div className={`
+      fixed inset-y-0 left-0 z-[45] flex transition-transform duration-300 transform
+      ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      md:relative md:translate-x-0 md:flex
+    `}>
+      <ServerBar 
+        rooms={rooms} 
+        viewState={viewState} 
+        currentRoom={currentRoom} 
+        onDMClick={() => { handleDMSelect(); setIsSidebarOpen(false); }} 
+        onRoomClick={(room) => { handleRoomSelect(room); setIsSidebarOpen(false); }} 
+        onAddRoom={() => setShowCreateRoomModal(true)} 
+      />
 
       <Sidebar
-        viewState={viewState} contacts={contacts} currentChat={currentChat} currentRoom={currentRoom} currentChannel={currentChannel} currentUser={currentUser}
-        onChatSelect={handleContactSelect} onChannelSelect={setCurrentChannel} notifications={notifications} onLogout={handleLogout}
-        onAddFriend={() => setShowAddFriendModal(true)} onManageChannels={() => setShowManageChannelsModal(true)} onManageMembers={() => setShowManageMembersModal(true)}
+        viewState={viewState} 
+        contacts={contacts} 
+        currentChat={currentChat} 
+        currentRoom={currentRoom} 
+        currentChannel={currentChannel} 
+        currentUser={currentUser}
+        onChatSelect={(contact) => { handleContactSelect(contact); setIsSidebarOpen(false); }} 
+        onChannelSelect={(channel) => { setCurrentChannel(channel); setIsSidebarOpen(false); }} 
+        notifications={notifications} 
+        onLogout={handleLogout}
+        onAddFriend={() => setShowAddFriendModal(true)} 
+        onManageChannels={() => setShowManageChannelsModal(true)} 
+        onManageMembers={() => setShowManageMembersModal(true)}
         onLeaveOrDelete={(roomId, ownerId) => handleLeaveOrDeleteRoom(roomId, ownerId)}
         onlineUsers={onlineUsers}
       />
+    </div>
 
-      <ChatWindow viewState={viewState} currentChat={currentChat} currentRoom={currentRoom} currentChannel={currentChannel} messages={messages} handleSendMsg={handleSendMsg} scrollRef={scrollRef} />
+    {/* ZONE DE CHAT PRINCIPALE */}
+    <div className="flex-1 h-full w-full min-w-0">
+      <ChatWindow 
+        viewState={viewState} 
+        currentChat={currentChat} 
+        currentRoom={currentRoom} 
+        currentChannel={currentChannel} 
+        messages={messages} 
+        handleSendMsg={handleSendMsg} 
+        scrollRef={scrollRef} 
+      />
+    </div>
+
+    {/* NOTIFICATIONS (Ajustement position mobile) */}
+    <div className="absolute top-3 right-4 md:right-10 z-30">
+      <button onClick={() => setShowRequestsModal(true)} className="relative p-2 bg-slate-900 border border-slate-800 rounded-full hover:border-[#22d3ee] transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${allNotifications.length > 0 ? "text-[#22d3ee] animate-pulse" : "text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+        {allNotifications.length > 0 && <span className="absolute -top-1 -right-1 flex h-4 w-4 bg-red-500 rounded-full text-[10px] text-white items-center justify-center font-bold">{allNotifications.length}</span>}
+      </button>
+    </div>
 
       {showAddFriendModal && <AddFriendModal currentUser={currentUser} socket={socket} onClose={() => setShowAddFriendModal(false)} />}
       {showRequestsModal && <JoinRequestsModal requests={allNotifications} onClose={() => setShowRequestsModal(false)} onUpdate={handleNotificationAction} />}

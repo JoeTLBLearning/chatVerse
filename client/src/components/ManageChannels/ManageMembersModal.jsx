@@ -11,7 +11,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
 
     // 2. Filtrer les amis : ceux qui ne sont PAS dans le salon + filtre de recherche
     // Note : On utilise la liste 'contacts' passée depuis le Dashboard
-    const availableFriends = contacts.filter(friend => 
+    const availableFriends = contacts.filter(friend =>
         !memberIds.includes(friend._id) &&
         friend.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -25,7 +25,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
             // Le backend attend un tableau 'userIds', donc on met [friendId]
             const { data } = await axios.post(sendInvitationRoute, {
                 roomId: currentRoom._id,
-                userIds: [friendId] 
+                userIds: [friendId]
             });
 
             if (data.status === false) {
@@ -46,7 +46,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
     const handleKickMember = async (memberId) => {
         if (memberId === currentRoom.owner) return;
         if (loading) return;
-        
+
         if (!window.confirm("Voulez-vous vraiment retirer ce membre ?")) return;
 
         setLoading(true);
@@ -56,7 +56,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
                 memberId: memberId,
                 ownerId: currentUser._id
             });
-            
+
             if (data.status) {
                 // Ici on met à jour car le membre est vraiment parti
                 onUpdateRoom(data.room);
@@ -71,7 +71,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
             <div className="bg-[#0f172a] border border-slate-800 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
-                
+
                 {/* HEADER */}
                 <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-[#0f172a]">
                     <div>
@@ -86,19 +86,19 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
                 </div>
 
                 <div className="overflow-y-auto p-6 space-y-6 custom-scrollbar">
-                    
+
                     {/* SECTION 1 : INVITER DES AMIS */}
                     <div>
                         <div className="flex items-center justify-between mb-3">
                             <label className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Inviter des amis</label>
                             <span className="text-slate-600 text-[10px]">{availableFriends.length} dispo</span>
                         </div>
-                        
+
                         {/* Barre de recherche */}
                         <div className="relative mb-3 group">
-                            <input 
-                                type="text" 
-                                placeholder="Rechercher un ami..." 
+                            <input
+                                type="text"
+                                placeholder="Rechercher un ami..."
                                 className="w-full bg-[#020617] border border-slate-800 text-slate-200 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-[#22d3ee] transition-all"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -116,7 +116,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
                                             </div>
                                             <span className="text-slate-300 text-sm font-medium">{friend.username}</span>
                                         </div>
-                                        <button 
+                                        <button
                                             onClick={() => handleSendInvite(friend._id)}
                                             className="p-1.5 bg-slate-800 text-[#22d3ee] rounded-lg hover:bg-[#22d3ee] hover:text-[#020617] transition-all opacity-0 group-hover:opacity-100"
                                             title="Envoyer une invitation"
@@ -137,11 +137,11 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
                     {/* SECTION 2 : MEMBRES ACTUELS */}
                     <div>
                         <label className="text-slate-500 text-[10px] font-bold uppercase tracking-widest block mb-3">Membres du salon ({currentRoom.members.length})</label>
-                        <div className="space-y-1">
+                        <div className="space-y-1 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
                             {currentRoom.members.map(member => {
                                 const isOwner = member._id === currentRoom.owner;
                                 const isMe = member._id === currentUser._id;
-                                
+
                                 return (
                                     <div key={member._id} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-800/30 transition-all group">
                                         <div className="flex items-center gap-3">
@@ -150,7 +150,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
                                             </div>
                                             <div>
                                                 <p className={`text-sm font-medium ${isOwner ? "text-amber-500" : "text-slate-300"}`}>
-                                                    {member.username} 
+                                                    {member.username}
                                                     {isMe && <span className="text-slate-500 text-[10px] ml-2">(Moi)</span>}
                                                 </p>
                                             </div>
@@ -158,7 +158,7 @@ export default function ManageMembersModal({ currentRoom, contacts, currentUser,
 
                                         {/* Bouton KICK (visible seulement si je suis owner et que la cible n'est pas owner) */}
                                         {currentUser._id === currentRoom.owner && !isOwner && (
-                                            <button 
+                                            <button
                                                 onClick={() => handleKickMember(member._id)}
                                                 className="p-1.5 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                                                 title="Retirer du salon"

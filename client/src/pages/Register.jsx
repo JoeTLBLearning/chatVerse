@@ -8,17 +8,17 @@ import Logo from "../assets/logo.png";
 
 function Register() {
   const navigate = useNavigate();
-  const [values, setValues] = useState({ 
-    username: "", 
-    email: "", 
-    password: "", 
-    confirmPassword: "" 
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   });
 
-  const toastOptions = { 
-    position: "bottom-right", 
-    autoClose: 5000, 
-    theme: "light" 
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 5000,
+    theme: "light"
   };
 
   const handleChange = (e) => {
@@ -65,10 +65,10 @@ function Register() {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-[#0f172a]">
-      <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          
+    <div className="min-h-screen w-screen flex items-center justify-center bg-[#0f172a] p-4 overflow-y-auto">
+      <div className="bg-white p-6 md:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-200 my-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:gap-4">
+
           {/* Section Logo */}
           <div className="flex flex-col items-center mb-2">
             <img src={Logo} alt="ChatVerse" className="h-20 w-auto object-contain" />
@@ -81,23 +81,23 @@ function Register() {
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
             type="text" placeholder="Nom d'utilisateur" name="username" onChange={handleChange}
           />
-          
+
           <input
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
             type="email" placeholder="Email" name="email" onChange={handleChange}
           />
-          
+
           <input
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
             type="password" placeholder="Mot de passe" name="password" onChange={handleChange}
           />
-          
+
           <input
             className="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg text-gray-900 focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] outline-none transition-all"
             type="password" placeholder="Confirmer le mot de passe" name="confirmPassword" onChange={handleChange}
           />
 
-          <button 
+          <button
             type="submit"
             className="w-full bg-[#22d3ee] text-[#0f172a] font-bold py-3 rounded-lg hover:bg-[#1cb9d1] transition-all uppercase shadow-lg shadow-cyan-100 mt-2"
           >
@@ -105,7 +105,7 @@ function Register() {
           </button>
 
           <p className="text-center text-gray-500 text-sm mt-2">
-            Déjà membre ? 
+            Déjà membre ?
             <Link to="/login" className="text-[#22d3ee] font-bold ml-1 hover:underline">
               Se connecter
             </Link>

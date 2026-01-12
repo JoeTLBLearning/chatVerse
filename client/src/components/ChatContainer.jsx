@@ -7,6 +7,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
 
   // Récupérer les messages quand on change de contact
   useEffect(() => {
+    setMessages([]); // Vide la liste actuelle avant de charger la nouvelle
     const fetchMessages = async () => {
       const response = await axios.post(recieveMessageRoute, {
         from: currentUser._id,
