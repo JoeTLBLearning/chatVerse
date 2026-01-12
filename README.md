@@ -173,22 +173,22 @@ Projet réalisé par Joe_TLB.
 ##  Bonus : Captures d'écrans 📸 
 1. La page de login : 
 <p align="center">
-  <img src="screenshots/login.JPG" width="700"/>
+  <img src="screenshots/login.JPG" width="500"/>
 </p>
 2. La page d'inscription :
 <p align="center">
-  <img src="screenshots/inscription.JPG" width="700"/>
+  <img src="screenshots/inscription.JPG" width="500"/>
 </p>
 3. Le dashboard :
 <p align="center">
-  <img src="screenshots/dashboard.JPG" width="700"/>
+  <img src="screenshots/dashboard.JPG" width="500"/>
 </p>
 4. Le modal d'invitation :
 <p align="center">
-  <img src="screenshots/addFriend.JPG" width="700"/>
+  <img src="screenshots/addFriend.JPG" width="500"/>
 </p>
 5. Le modal de gestion des membre du salon :
 <p align="center">
-  <img src="screenshots/manageRoom.JPG" width="700"/>
+  <img src="screenshots/manageRoom.JPG" width="500"/>
 </p>
 
