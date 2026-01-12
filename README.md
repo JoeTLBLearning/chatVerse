@@ -95,3 +95,55 @@ npm run dev
 
 ```
 
+Ouvrez votre navigateur sur http://localhost:5173.
+
+
+## Bonus : Déploiement (Production sur Render)
+Le projet est configuré pour être déployé sur Render avec deux services distincts.
+
+Backend (Web Service)
+Root Directory : server
+
+Build Command : npm install
+
+Start Command : npm start
+
+Variables d'environnement :
+
+MONGO_URI : Lien MongoDB Atlas.
+
+PORT : 10000 (Port par défaut de Render).
+
+FRONTEND_URL : L'URL de votre site frontend déployé (ex: https://chatverse.onrender.com).
+
+Frontend (Static Site)
+Root Directory : client
+
+Build Command : npm install && npm run build
+
+Publish Directory : dist
+
+Réglages SPA : Ajouter une règle de réécriture (Rewrite) dans l'onglet "Redirects/Rewrites" :
+
+Source: /* -> Destination: /index.html -> Action: Rewrite.
+
+
+## Structure du projet : 
+
+chatVerse/
+├── client/              # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── components/  # Modals, ChatWindow, Sidebar...
+│   │   ├── hooks/       # Hooks personnalisés (useSocket...)
+│   │   ├── pages/       # Login, Register, Dashboard
+│   │   └── utils/       # Routes API
+│   └── ...
+├── server/              # Backend (Node + Express)
+│   ├── controllers/     # Logique métier
+│   ├── models/          # Schémas Mongoose (User, Message, Room...)
+│   ├── routes/          # Définitions des routes API
+│   └── index.js         # Point d'entrée (Socket.io setup)
+└── README.md
+
+# 👤 Auteur
+Projet réalisé par Joe_TLB.
