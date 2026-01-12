@@ -170,14 +170,17 @@ chatVerse/
 # 👤 Auteur
 Projet réalisé par Joe_TLB.
 
-##  Bonus : Captures d'écrans 
+##  Bonus : Captures d'écrans 📸 
 1. La page de login : 
 ![La page de login](/screenshots/login.jpg)
 2. La page d'inscription
-![La page d'inscription](screenshots/inscription.jpg)
+![La page d'inscription](screenshots/inscription.JPG)
 3. Le dashboard
 ![Le dashboard](screenshots/dashboard.jpg)
 4. Le modal d'invitation
 ![Le modal d'invitation](screenshots/addFriend.jpg)
-5. Le modal de gestion des membre du salon 
-![Le modal de gestion des membre du salon ](screenshots/manageRoom.jpg)
+5. Le modal de gestion des membre du salon
+<p align="center">
+  <img src="screenshots/manageRoom.jpg" width="700"/>
+</p>
+
