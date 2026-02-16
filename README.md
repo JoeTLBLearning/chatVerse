@@ -168,7 +168,7 @@ chatVerse/
 ```
 
 # 👤 Auteur
-Projet réalisé par Joe_TLB.
+Projet réalisé par Youcef-Amine TALEB.
 
 ##  Bonus : Captures d'écrans 📸 
 
